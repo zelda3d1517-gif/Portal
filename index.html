@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrintCraft 3D | Figuras y Vehículos en Honduras</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ================= VARIABLES ================= */
+        :root {
+            --primary: #2563EB; /* Azul confiable/tecnológico */
+            --primary-hover: #1D4ED8;
+            --accent: #F59E0B; /* Naranja cálido (Call to action) */
+            --accent-hover: #D97706;
+            --bg-light: #F8FAFC;
+            --surface: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-muted: #64748B;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ================= RESET & BASE ================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: var(--text-dark); }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+        
+        /* ================= REUSABLES ================= */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section-title { text-align: center; font-size: 2.5rem; font-weight: 700; margin-bottom: 3rem; color: var(--text-dark); }
+        .section-title span { color: var(--primary); }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: var(--transition); border: none; outline: none; }
+        .btn-primary { background-color: var(--primary); color: white; box-shadow: var(--shadow-md); }
+        .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+        .btn-accent { background-color: var(--accent); color: white; box-shadow: var(--shadow-md); }
+        .btn-accent:hover { background-color: var(--accent-hover); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+        .btn-outline { background-color: transparent; border: 2px solid var(--primary); color: var(--primary); }
+        .btn-outline:hover { background-color: var(--primary); color: white; }
+
+        /* ================= HEADER & NAV ================= */
+        header { background-color: var(--surface); box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 100; padding: 15px 0; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 10px; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-weight: 500; color: var(--text-muted); transition: var(--transition); }
+        .nav-links a:hover { color: var(--primary); }
+        .cart-icon-container { position: relative; cursor: pointer; font-size: 1.5rem; color: var(--text-dark); transition: var(--transition); }
+        .cart-icon-container:hover { color: var(--primary); transform: scale(1.1); }
+        .cart-badge { position: absolute; top: -8px; right: -8px; background-color: var(--accent); color: white; font-size: 0.75rem; font-weight: 700; height: 20px; width: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+        /* ================= HERO SECTION ================= */
+        .hero { padding: 80px 0; display: flex; align-items: center; justify-content: space-between; min-height: 80vh; background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%); }
+        .hero-content { flex: 1; padding-right: 40px; }
+        .hero-title { font-size: 3.5rem; line-height: 1.2; margin-bottom: 20px; color: var(--text-dark); }
+        .hero-text { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 30px; line-height: 1.6; }
+        .hero-image { flex: 1; display: flex; justify-content: center; position: relative; }
+        .hero-image img { border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); transform: perspective(1000px) rotateY(-15deg); transition: var(--transition); }
+        .hero-image img:hover { transform: perspective(1000px) rotateY(0deg) scale(1.05); }
+
+        /* ================= BENEFICIOS ================= */
+        .benefits { padding: 40px 0; background-color: var(--surface); border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; }
+        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; text-align: center; }
+        .benefit-card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; }
+        .benefit-card h4 { font-size: 1.2rem; margin-bottom: 10px; }
+        .benefit-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* ================= QUIÉNES SOMOS ================= */
+        .about { padding: 80px 0; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .about-text p { margin-bottom: 20px; color: var(--text-muted); line-height: 1.7; font-size: 1.05rem; }
+        .testimonial { background: white; padding: 20px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); border-left: 4px solid var(--accent); margin-top: 20px; font-style: italic; }
+
+        /* ================= CATÁLOGO / TIENDA ================= */
+        .catalog { padding: 80px 0; background-color: var(--surface); }
+        .filters { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
+        .filter-select { padding: 10px 20px; border-radius: 50px; border: 1px solid #cbd5e1; background: white; font-family: inherit; font-size: 1rem; color: var(--text-dark); cursor: pointer; outline: none; transition: var(--transition); }
+        .filter-select:focus, .filter-select:hover { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+        .card { background-color: white; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid #f1f5f9; display: flex; flex-direction: column; }
+        .card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); border-color: #e2e8f0; }
+        .card-img-wrap { height: 220px; overflow: hidden; position: relative; background: #f8fafc; display: flex; align-items: center; justify-content: center; }
+        .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .card:hover .card-img-wrap img { transform: scale(1.1); }
+        .card-badge { position: absolute; top: 10px; right: 10px; background: var(--primary); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; text-transform: capitalize; }
+        .card-content { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 5px; color: var(--text-dark); }
+        .card-specs { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; display: flex; gap: 10px; }
+        .card-price { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 20px; }
+        .card .btn { width: 100%; margin-top: auto; }
+
+        /* ================= CONTACTO ================= */
+        .contact { padding: 80px 0; }
+        .contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; background: white; padding: 40px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); }
+        .contact-info h3 { margin-bottom: 20px; font-size: 1.8rem; }
+        .contact-info p { color: var(--text-muted); margin-bottom: 30px; line-height: 1.6; }
+        .contact-methods { display: flex; flex-direction: column; gap: 20px; }
+        .method { display: flex; align-items: center; gap: 15px; }
+        .method i { width: 40px; height: 40px; background: var(--bg-light); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+        .form-group { margin-bottom: 20px; }
+        .form-control { width: 100%; padding: 12px 15px; border: 1px solid #cbd5e1; border-radius: var(--radius-md); font-family: inherit; transition: var(--transition); }
+        .form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+        textarea.form-control { resize: vertical; min-height: 120px; }
+
+        /* ================= CARRITO OVERLAY (SIDEBAR) ================= */
+        .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; opacity: 0; visibility: hidden; transition: var(--transition); backdrop-filter: blur(3px); }
+        .cart-overlay.active { opacity: 1; visibility: visible; }
+        .cart-sidebar { position: fixed; top: 0; right: -400px; width: 400px; max-width: 100%; height: 100%; background: white; z-index: 1001; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; }
+        .cart-sidebar.active { right: 0; }
+        .cart-header { padding: 20px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
+        .cart-header h3 { font-size: 1.5rem; }
+        .close-cart { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); transition: var(--transition); }
+        .close-cart:hover { color: #ef4444; transform: rotate(90deg); }
+        .cart-body { padding: 20px; overflow-y: auto; flex-grow: 1; }
+        .cart-empty { text-align: center; color: var(--text-muted); margin-top: 50px; }
+        .cart-empty i { font-size: 3rem; margin-bottom: 15px; color: #cbd5e1; }
+        .cart-item { display: flex; gap: 15px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #f1f5f9; }
+        .cart-item-img { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; }
+        .cart-item-info { flex-grow: 1; }
+        .cart-item-title { font-weight: 600; font-size: 1rem; color: var(--text-dark); margin-bottom: 5px; }
+        .cart-item-price { color: var(--primary); font-weight: 600; margin-bottom: 10px; }
+        .cart-controls { display: flex; align-items: center; gap: 15px; }
+        .qty-btn { width: 28px; height: 28px; border-radius: 50%; border: 1px solid #cbd5e1; background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+        .qty-btn:hover { background: var(--bg-light); border-color: var(--primary); }
+        .remove-btn { color: #ef4444; cursor: pointer; font-size: 0.9rem; border: none; background: transparent; }
+        .cart-footer { padding: 20px; border-top: 1px solid #e2e8f0; background: var(--bg-light); }
+        .cart-total { display: flex; justify-content: space-between; font-size: 1.25rem; font-weight: 700; margin-bottom: 20px; }
+        .checkout-btn { width: 100%; background: #25D366; /* WhatsApp Green */ color: white; justify-content: center; padding: 15px; font-size: 1.1rem; }
+        .checkout-btn:hover { background: #128C7E; transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+        /* ================= FOOTER & FLOATING WA ================= */
+        footer { background: var(--text-dark); color: white; padding: 40px 0 20px; text-align: center; }
+        .footer-content { margin-bottom: 20px; }
+        .floating-wa { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: var(--shadow-lg); z-index: 90; transition: var(--transition); animation: pulse 2s infinite; }
+        .floating-wa:hover { background: #128C7E; transform: scale(1.1); animation: none; }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; padding: 40px 0; }
+            .hero-content { padding-right: 0; margin-bottom: 40px; }
+            .hero-title { font-size: 2.5rem; }
+            .nav-links { display: none; /* Simplificación para MVP móvil */ }
+            .about-grid, .contact-container { grid-template-columns: 1fr; }
+            .cart-sidebar { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-cube"></i> PrintCraft 3D
+            </a>
+            <nav class="nav-links">
+                <a href="#home">Inicio</a>
+                <a href="#nosotros">Quiénes Somos</a>
+                <a href="#catalogo">Catálogo</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+            <div class="cart-icon-container" id="cart-icon" aria-label="Abrir Carrito">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-badge" id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="hero container">
+        <div class="hero-content">
+            <h1 class="hero-title">Dale Forma a tu Imaginación en 3D</h1>
+            <p class="hero-text">Creamos vehículos y figuras 3D de alta precisión con materiales premium. Desde prototipos hasta juguetes de colección, entregamos calidad garantizada en toda Honduras.</p>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; justify-content: flex-start;">
+                <a href="#catalogo" class="btn btn-primary"><i class="fa-solid fa-shop"></i> Ver Catálogo</a>
+                <a href="https://wa.me/50433701605?text=%C2%A1Hola!%20Me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20servicios%20de%20impresi%C3%B3n%203D." target="_blank" class="btn btn-outline"><i class="fa-brands fa-whatsapp"></i> Chat Rápido</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?auto=format&fit=crop&w=600&q=80" alt="Vehículo deportivo impreso en 3D">
+        </div>
+    </section>
+
+    <section class="benefits">
+        <div class="container benefits-grid">
+            <div class="benefit-card">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h4>Calidad Garantizada</h4>
+                <p>Acabados limpios y materiales resistentes (PLA/PETG).</p>
+            </div>
+            <div class="benefit-card">
+                <i class="fa-solid fa-truck-fast"></i>
+                <h4>Envíos Nacionales</h4>
+                <p>Despachos a todo el territorio hondureño.</p>
+            </div>
+            <div class="benefit-card">
+                <i class="fa-solid fa-palette"></i>
+                <h4>Colores Sólidos</h4>
+                <p>Amplia variedad de filamentos disponibles.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="nosotros" class="about container">
+        <h2 class="section-title">Sobre <span>Nosotros</span></h2>
+        <div class="about-grid">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1631541909061-71e34a2e5db2?auto=format&fit=crop&w=600&q=80" alt="Impresora 3D trabajando" style="border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
+            </div>
+            <div class="about-text">
+                <h3>Pasión por la creación digital</h3>
+                <p>En PrintCraft 3D transformamos polígonos en realidad. Nuestro proceso de creación inicia con un cuidadoso modelado y curado de archivos, asegurando que cada vehículo y figura cumpla con estrictos estándares de integridad estructural.</p>
+                <p>Trabajamos con total transparencia: recibes exactamente lo que ves. Nuestro respaldo radica en cientos de impresiones exitosas y clientes satisfechos que confían en la precisión de nuestro trabajo.</p>
+                <div class="testimonial">
+                    "Excelente nivel de detalle en los vehículos. El plástico es muy sólido y el color rojo quedó espectacular. Recomendados 100%." <br><strong>- Carlos M., Tegucigalpa</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="catalogo" class="catalog">
+        <div class="container">
+            <h2 class="section-title">Nuestro <span>Catálogo</span></h2>
+            
+            <div class="filters">
+                <select id="filter-model" class="filter-select">
+                    <option value="todos">Todos los Modelos</option>
+                    <option value="vehiculo">Vehículos</option>
+                    <option value="figura">Figuras</option>
+                </select>
+                <select id="filter-color" class="filter-select">
+                    <option value="todos">Todos los Colores</option>
+                    <option value="rojo">Rojo</option>
+                    <option value="azul">Azul</option>
+                    <option value="gris">Gris</option>
+                    <option value="blanco">Blanco</option>
+                    <option value="verde">Verde</option>
+                </select>
+            </div>
+
+            <div class="grid" id="product-grid">
+                </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="contact bg-light">
+        <div class="container">
+            <h2 class="section-title">Contáctanos</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>¿Tienes un diseño personalizado?</h3>
+                    <p>Si tienes un archivo STL o necesitas asesoría para un proyecto especial, escríbenos. Estamos listos para materializar tu idea con la mejor relación calidad-precio.</p>
+                    
+                    <div class="contact-methods">
+                        <div class="method">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <div>
+                                <strong>Ubicación</strong>
+                                <p style="margin:0;">Honduras (Envíos a nivel nacional)</p>
+                            </div>
+                        </div>
+                        <div class="method">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <div>
+                                <strong>WhatsApp Ventas</strong>
+                                <p style="margin:0;">+504 3370-1605</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="https://wa.me/50433701605?text=%C2%A1Hola!%20Me%20gustar%C3%ADa%20hacer%20una%20consulta%20general." target="_blank" class="btn btn-accent" style="margin-top: 30px;">
+                        <i class="fa-brands fa-whatsapp"></i> Consultar por WhatsApp
+                    </a>
+                </div>
+                
+                <div class="contact-form">
+                    <form onsubmit="event.preventDefault(); alert('En un entorno de producción, esto enviaría un correo. Para comprar, usa el botón de WhatsApp.');">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Tu Nombre Completo" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Tu Correo Electrónico" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="¿En qué podemos ayudarte? (Si es una cotización de un modelo propio, describe el tamaño y detalles)" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Mensaje <i class="fa-solid fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="logo" style="color: white; justify-content: center; margin-bottom: 15px;">
+                <i class="fa-solid fa-cube"></i> PrintCraft 3D
+            </div>
+            <p class="footer-content">© 2026 PrintCraft 3D. Diseñado para ofrecer la mejor experiencia en impresión 3D en Honduras.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/50433701605?text=%C2%A1Hola!%20Me%20gustar%C3%ADa%20hacer%20una%20consulta." target="_blank" class="floating-wa" aria-label="Chat WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <div class="cart-overlay" id="cart-overlay"></div>
+    
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu Pedido</h3>
+            <button class="close-cart" id="close-cart"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-body" id="cart-body">
+            </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total Referencial:</span>
+                <span id="cart-total-price">L 0.00</span>
+            </div>
+            <button class="btn checkout-btn" onclick="checkoutWhatsApp()">
+                <i class="fa-brands fa-whatsapp"></i> Finalizar Pedido por WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- BASE DE DATOS DE PRODUCTOS (MVP) ---
+        const products = [
+            { id: 1, name: "Auto Deportivo Clásico", price: 350, color: "rojo", model: "vehiculo", img: "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?auto=format&fit=crop&w=400&q=80" },
+            { id: 2, name: "Camioneta Off-Road", price: 450, color: "azul", model: "vehiculo", img: "https://images.unsplash.com/photo-1594051480112-9e900994fbc2?auto=format&fit=crop&w=400&q=80" },
+            { id: 3, name: "Mecha Robot Articulado", price: 280, color: "gris", model: "figura", img: "https://images.unsplash.com/photo-1535320903710-d993d3d77d29?auto=format&fit=crop&w=400&q=80" },
+            { id: 4, name: "Nave Espacial Mini", price: 150, color: "blanco", model: "vehiculo", img: "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?auto=format&fit=crop&w=400&q=80" },
+            { id: 5, name: "Tanque de Colección", price: 500, color: "verde", model: "vehiculo", img: "https://images.unsplash.com/photo-1626307416562-ee839676f5e1?auto=format&fit=crop&w=400&q=80" },
+            { id: 6, name: "Dinosaurio T-Rex Low Poly", price: 300, color: "rojo", model: "figura", img: "https://images.unsplash.com/photo-1606856110002-d084b9e8bc1a?auto=format&fit=crop&w=400&q=80" }
+        ];
+
+        // --- ESTADO DEL CARRITO ---
+        let cart = JSON.parse(localStorage.getItem('printcraft_cart')) || [];
+
+        // --- REFERENCIAS DOM ---
+        const grid = document.getElementById('product-grid');
+        const filterModel = document.getElementById('filter-model');
+        const filterColor = document.getElementById('filter-color');
+        
+        const cartIcon = document.getElementById('cart-icon');
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const cartOverlay = document.getElementById('cart-overlay');
+        const closeCartBtn = document.getElementById('close-cart');
+        const cartBody = document.getElementById('cart-body');
+        const cartCount = document.getElementById('cart-count');
+        const cartTotalPrice = document.getElementById('cart-total-price');
+
+        // --- RENDERIZAR PRODUCTOS ---
+        function renderProducts(items) {
+            grid.innerHTML = '';
+            if (items.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #64748B;">No se encontraron figuras con esos filtros.</p>';
+                return;
+            }
+
+            items.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-img-wrap">
+                        <span class="card-badge">${product.color}</span>
+                        <img src="${product.img}" alt="${product.name}" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">${product.name}</h3>
+                        <div class="card-specs">
+                            <span><i class="fa-solid fa-layer-group"></i> ${product.model === 'vehiculo' ? 'Vehículo' : 'Figura'}</span>
+                        </div>
+                        <div class="card-price">L ${product.price.toFixed(2)}</div>
+                        <button class="btn btn-primary" onclick="addToCart(${product.id})">
+                            <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // --- FILTROS ---
+        function applyFilters() {
+            const m = filterModel.value;
+            const c = filterColor.value;
+            
+            const filtered = products.filter(p => {
+                const matchModel = m === 'todos' || p.model === m;
+                const matchColor = c === 'todos' || p.color === c;
+                return matchModel && matchColor;
+            });
+            renderProducts(filtered);
+        }
+
+        filterModel.addEventListener('change', applyFilters);
+        filterColor.addEventListener('change', applyFilters);
+
+        // --- LÓGICA DEL CARRITO ---
+        function updateCartUI() {
+            // Guardar en persistencia
+            localStorage.setItem('printcraft_cart', JSON.stringify(cart));
+            
+            // Actualizar Badge
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+
+            // Actualizar Cuerpo del Carrito
+            cartBody.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartBody.innerHTML = `
+                    <div class="cart-empty">
+                        <i class="fa-solid fa-box-open"></i>
+                        <p>Tu carrito está vacío.</p>
+                        <p style="font-size: 0.9rem; margin-top: 10px;">¡Agrega algunas figuras 3D increíbles!</p>
+                    </div>
+                `;
+                cartTotalPrice.textContent = 'L 0.00';
+                return;
+            }
+
+            let total = 0;
+            cart.forEach(item => {
+                const subtotal = item.price * item.quantity;
+                total += subtotal;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.img}" alt="${item.name}" class="cart-item-img">
+                    <div class="cart-item-info">
+                        <div class="cart-item-title">${item.name} <span style="font-size:0.8rem; color:gray;">(${item.color})</span></div>
+                        <div class="cart-item-price">L ${item.price.toFixed(2)}</div>
+                        <div class="cart-controls">
+                            <button class="qty-btn" onclick="changeQty(${item.id}, -1)"><i class="fa-solid fa-minus" style="font-size:0.7rem;"></i></button>
+                            <span>${item.quantity}</span>
+                            <button class="qty-btn" onclick="changeQty(${item.id}, 1)"><i class="fa-solid fa-plus" style="font-size:0.7rem;"></i></button>
+                            <button class="remove-btn" onclick="removeFromCart(${item.id})"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                `;
+                cartBody.appendChild(cartItem);
+            });
+
+            cartTotalPrice.textContent = `L ${total.toFixed(2)}`;
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const existingItem = cart.find(item => item.id === id);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            
+            updateCartUI();
+            openCart(); // Dar feedback visual abriendo el carrito
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(item => item.id === id);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    removeFromCart(id);
+                } else {
+                    updateCartUI();
+                }
+            }
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartUI();
+        }
+
+        // --- CHECKOUT WHATSAPP ---
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                alert("Tu carrito está vacío. Agrega productos antes de finalizar.");
+                return;
+            }
+
+            const phone = "50433701605";
+            let totalRef = 0;
+            
+            let msg = "¡Hola! Me interesa cotizar y conocer disponibilidad de estas figuras 3D.\n\n*Mi Pedido:*\n";
+            
+            cart.forEach(item => {
+                const sub = item.price * item.quantity;
+                totalRef += sub;
+                msg += `- ${item.quantity}x ${item.name} (${item.color}) - L ${item.price} c/u = L ${sub}\n`;
+            });
+
+            msg += `\n*Total Referencial:* L ${totalRef.toFixed(2)}\n\n`;
+            msg += "¿Me confirmas disponibilidad y próximos pasos? También podemos coordinar una llamada si es necesario.";
+
+            const urlEncodedText = encodeURIComponent(msg);
+            const finalUrl = `https://wa.me/${phone}?text=${urlEncodedText}`;
+            
+            window.open(finalUrl, '_blank');
+        }
+
+        // --- MANEJO DE UI SIDEBAR ---
+        function openCart() {
+            cartSidebar.classList.add('active');
+            cartOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Evitar scroll fondo
+        }
+
+        function closeCart() {
+            cartSidebar.classList.remove('active');
+            cartOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        cartIcon.addEventListener('click', openCart);
+        closeCartBtn.addEventListener('click', closeCart);
+        cartOverlay.addEventListener('click', closeCart);
+
+        // --- INICIALIZACIÓN ---
+        renderProducts(products);
+        updateCartUI();
+
+    </script>
+</body>
+</html>
