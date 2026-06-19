@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus3D Studio | Premium 3D Printed Figures & Collectibles</title>
+    <meta name="description" content="High-quality 3D printed Pokemon, Dinosaurs, and Lego-inspired figures. Crafted with precision PLA, vibrant colors, and eco-friendly materials.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* -------------------------------------------------------------------------- */
+        /* 1. DESIGN SYSTEM & VARIABLES (Sobrio, Tecnológico y Confiable)             */
+        /* -------------------------------------------------------------------------- */
+        :root {
+            --primary: #0284c7;          /* Azul tecnológico de precisión */
+            --primary-hover: #0369a1;
+            --dark-bg: #0f172a;         /* Slate oscuro premium */
+            --card-bg: #1e293b;         /* Fondo de tarjetas */
+            --text-main: #f8fafc;       /* Blanco puro/gris claro */
+            --text-muted: #94a3b8;      /* Gris para textos secundarios */
+            --accent: #22c55e;          /* Verde de éxito / WhatsApp */
+            --accent-hover: #16a34a;
+            --border-color: #334155;    /* Bordes sutiles */
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            --font-heading: 'Space Grotesk', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-sm: 0 2px 8px -1px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+        }
+
+        /* RESET & BASE STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button, input, textarea {
+            font-family: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .text-center { text-align: center; }
+        
+        .badge {
+            background: rgba(2, 132, 199, 0.15);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            margin-bottom: 16px;
+            border: 1px solid rgba(2, 132, 199, 0.3);
+        }
+
+        /* BUTTONS (Microinteractions) */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.6);
+        }
+
+        .btn-primary:active { transform: translateY(0); }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: var(--text-muted);
+            transform: translateY(-2px);
+        }
+
+        .btn-whatsapp {
+            background-color: var(--accent);
+            color: white;
+            box-shadow: 0 4px 14px rgba(34, 197, 94, 0.4);
+        }
+
+        .btn-whatsapp:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.6);
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* 2. HEADER & NAVIGATION (Glassmorphism)                                      */
+        /* -------------------------------------------------------------------------- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span { color: var(--primary); }
+
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-link {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: var(--transition);
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--text-main);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cart-trigger {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.3rem;
+            cursor: pointer;
+            position: relative;
+            padding: 8px;
+            transition: var(--transition);
+        }
+
+        .cart-trigger:hover { color: var(--primary); }
+
+        .cart-count {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background-color: var(--primary);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* 3. HERO SECTION                                                            */
+        /* -------------------------------------------------------------------------- */
+        .hero {
+            padding-top: 160px;
+            padding-bottom: 100px;
+            background: radial-gradient(circle at top right, rgba(2, 132, 199, 0.15), transparent 50%),
+                        radial-gradient(circle at bottom left, rgba(15, 23, 42, 1), transparent 50%);
+            position: relative;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1sfr 0.9fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .hero-title span {
+            background: linear-gradient(to right, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 36px;
+            max-width: 540px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image-bg {
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(2, 132, 199, 0.2) 0%, transparent 70%);
+            z-index: 1;
+            top: -10%;
+        }
+
+        .hero-img {
+            z-index: 2;
+            filter: drop-shadow(0 25px 50px rgba(0,0,0,0.5));
+            animation: float 6s ease-in-out infinite;
+            max-height: 450px;
+            object-fit: contain;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* 4. VALUE PROPOSITION / BENEFITS                                            */
+        /* -------------------------------------------------------------------------- */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .benefit-card {
+            background-color: var(--card-bg);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(2, 132, 199, 0.4);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .benefit-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        .benefit-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* 5. ABOUT US & PROCESS & TESTIMONIALS                                      */
+        /* -------------------------------------------------------------------------- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+        }
+
+        .about-text {
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .process-steps {
+            margin-top: 32px;
+        }
+
+        .step {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .step-num {
+            background: rgba(2, 132, 199, 0.1);
+            color: var(--primary);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.2rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 1px solid rgba(2, 132, 199, 0.3);
+        }
+
+        .step-info h4 { font-size: 1.1rem; margin-bottom: 4px; }
+        .step-info p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* TESTIMONIALS SIMULADOS */
+        .testimonials-section {
+            margin-top: 80px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 60px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(145deg, #1e293b, #111827);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .testimonial-stars { color: #fbbf24; margin-bottom: 16px; font-size: 0.9rem;}
+        .testimonial-text { font-style: italic; color: var(--text-main); margin-bottom: 20px; font-size: 0.95rem;}
+        .testimonial-author { display: flex; align-items: center; gap: 12px; }
+        .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: #334155; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--primary);}
+        .author-info h5 { font-size: 0.95rem; }
+        .author-info p { color: var(--text-muted); font-size: 0.8rem; }
+
+        /* -------------------------------------------------------------------------- */
+        /* 6. CATALOG / STORE (Premium Cards)                                         */
+        /* -------------------------------------------------------------------------- */
+        .catalog-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--card-bg);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(2, 132, 199, 0.4);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .product-image-container {
+            background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
+            padding: 30px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 260px;
+            overflow: hidden;
+        }
+
+        .product-img {
+            max-height: 100%;
+            object-fit: contain;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.08);
+        }
+
+        .product-tag {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(4px);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+
+        .product-content {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .product-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .product-meta span i { color: var(--primary); margin-right: 4px;}
+
+        .product-footer {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .product-price {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-icon-cart {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .btn-icon-cart:hover { background-color: var(--primary-hover); transform: scale(1.05); }
+
+        /* -------------------------------------------------------------------------- */
+        /* 7. SHOPPING CART SLIDEOUT DIALOG                                           */
+        /* -------------------------------------------------------------------------- */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .cart-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 100%;
+            max-width: 450px;
+            height: 100%;
+            background-color: var(--card-bg);
+            z-index: 2001;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            transition: cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-overlay.active .cart-modal {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-close {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cart-close:hover { color: var(--text-main); }
+
+        .cart-body {
+            flex-grow: 1;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .cart-empty-msg {
+            text-align: center;
+            color: var(--text-muted);
+            margin-top: 40px;
+        }
+
+        .cart-empty-msg i {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            color: var(--border-color);
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 16px;
+            background: rgba(15, 23, 42, 0.3);
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border-color);
+            align-items: center;
+        }
+
+        .cart-item-img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            background: var(--dark-bg);
+            border-radius: 8px;
+            padding: 4px;
+        }
+
+        .cart-item-details { flex-grow: 1; }
+        .cart-item-title { font-size: 1rem; margin-bottom: 4px; font-weight: 600;}
+        .cart-item-price { color: var(--primary); font-weight: 700; font-size: 0.95rem; }
+
+        .cart-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .qty-btn {
+            background: var(--border-color);
+            border: none;
+            color: var(--text-main);
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .qty-btn:hover { background: var(--primary); }
+        .qty-val { font-size: 0.9rem; width: 20px; text-align: center; }
+
+        .cart-item-remove {
+            background: transparent;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            padding: 8px;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+        .cart-item-remove:hover { transform: scale(1.1); }
+
+        .cart-footer {
+            padding: 24px;
+            border-top: 1px solid var(--border-color);
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        .cart-summary-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+        }
+        .cart-total-label { font-weight: 600; }
+        .cart-total-value { font-family: var(--font-heading); font-weight: 700; color: var(--text-main); font-size: 1.4rem;}
+
+        .cart-checkout-btn {
+            width: 100%;
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* 8. CONTACT SECTION & FOOTER                                                */
+        /* -------------------------------------------------------------------------- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 60px;
+        }
+
+        .contact-info-card {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .contact-details { margin-top: 32px; }
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(2, 132, 199, 0.1);
+            color: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            border: 1px solid rgba(2, 132, 199, 0.2);
+        }
+        .contact-method-text h4 { font-size: 1rem; color: var(--text-muted); }
+        .contact-method-text p { font-size: 1.1rem; font-weight: 600; }
+
+        .contact-form {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .form-control {
+            width: 100%;
+            background-color: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            padding: 14px 18px;
+            border-radius: 10px;
+            color: var(--text-main);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+        }
+
+        .footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px 0;
+            background-color: #0b111e;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* 9. RESPONSIVE MEDIA QUERIES                                                */
+        /* -------------------------------------------------------------------------- */
+        @media (max-width: 992px) {
+            .hero-grid, .about-grid, .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .hero-title { font-size: 2.8rem; }
+            .hero-image-wrapper { order: -1; }
+            .hero-img { max-height: 350px; }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--dark-bg);
+                flex-direction: column;
+                padding: 40px;
+                gap: 24px;
+                transition: var(--transition);
+                border-top: 1px solid var(--border-color);
+            }
+            .nav-menu.active { left: 0; }
+            .section-padding { padding: 60px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container navbar">
+            <a href="#home" class="logo">
+                <i class="fa-solid Cube fa-cubes-stacked"></i> NEXUS<span>3D</span>
+            </a>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#about" class="nav-link">About Us</a></li>
+                    <li><a href="#catalog" class="nav-link">Catalog</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <button class="cart-trigger" id="cartTrigger" aria-label="Open shopping cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <span class="badge">Next-Gen Additive Manufacturing</span>
+                <h1 class="hero-title">Premium 3D Printed <span>Figures & Collectibles</span></h1>
+                <p class="hero-description">High-precision geometric art and custom figures engineered with top-tier PLA. Perfect for collectors, gift-seekers, and enthusiasts demanding industrial-grade finish.</p>
+                <div class="hero-actions">
+                    <a href="#catalog" class="btn btn-primary">Browse Catalog <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="https://wa.me/50433701605?text=Hi%20there!%20I'm%20interested%20in%20learning%20more%20about%20your%20custom%203D%20printing%20services." target="_blank" class="btn btn-secondary"><i class="fa-brands fa-whatsapp"></i> Custom Order</a>
+                </div>
+            </div>
+            <div class="hero-image-wrapper">
+                <div class="hero-image-bg"></div>
+                <img src="https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?auto=format&fit=crop&q=80&w=600" alt="Premium 3D Printed Showcase" class="hero-img">
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" style="background-color: #0b111e;">
+        <div class="container">
+            <div class="text-center">
+                <span class="badge">Why Choose Nexus3D</span>
+                <h2>Engineered For Perfection</h2>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <i class="fa-solid fa-layer-group benefit-icon"></i>
+                    <h3>Ultra-Fine Layers</h3>
+                    <p>Printed at 0.12mm layer height for seamless finishes, drastically reducing standard print lines.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fa-solid fa-palette benefit-icon"></i>
+                    <h3>Premium Silk PLA</h3>
+                    <p>We source structural, eco-friendly PLA polymers delivering deep coloration and high impact resistance.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fa-solid fa-box-open benefit-icon"></i>
+                    <h3>Secure US Shipping</h3>
+                    <p>Every dynamic figure undergoes rigorous QC and is packed in custom foam inserts to prevent transit stress.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1615840287214-7fe58a8b668f?auto=format&fit=crop&q=80&w=600" alt="Industrial 3D Printing Process" style="border-radius: 20px; box-shadow: var(--shadow-lg); border: 1px solid var(--border-color);">
+                </div>
+                <div class="about-content">
+                    <span class="badge">Precision Craftsmanship</span>
+                    <h2>The Nexus3D Standard</h2>
+                    <p class="about-text">Founded by digital design specialists, Nexus3D bridges the gap between digital models and absolute material execution. We import elite design matrices and render them through proprietary slicer setups.</p>
+                    <p class="about-text">Transparency, absolute safety standards, and reliable structural warranties support every item shipped across the United States. We run automated continuous monitoring on our printers to ensure zero-defect output.</p>
+                    
+                    <div class="process-steps">
+                        <div class="step">
+                            <div class="step-num">01</div>
+                            <div class="step-info">
+                                <h4>Filament Import & Calibration</h4>
+                                <p>We import multi-tonal filaments ensuring optimal melting density and color saturation.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-num">02</div>
+                            <div class="step-info">
+                                <h4>Post-Processing Integrity</h4>
+                                <p>Support structures are microsurgically removed followed by thermal finishing for clean edges.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonials-section">
+                <div class="text-center">
+                    <h2>What Collectors Say</h2>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <p class="testimonial-text">"The layer lines are practically invisible on the Mewtwo figure. Color shifting PLA is incredible. Will order again next month!"</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">A</div>
+                            <div class="author-info">
+                                <h5>Alex K.</h5>
+                                <p>Verified Buyer - California</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <p class="testimonial-text">"Stunning T-Rex model. Has heavy, rugged infill settings so it feels exceptionally sturdy. Fast logistics to Texas."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">M</div>
+                            <div class="author-info">
+                                <h5>Marcus V.</h5>
+                                <p>Verified Buyer - Texas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="catalog" class="section-padding" style="background-color: #0b111e;">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 40px;">
+                <span class="badge">Curated Collection</span>
+                <h2>High-Definition 3D Models</h2>
+            </div>
+
+            <div class="catalog-controls">
+                <button class="filter-btn active" data-filter="all">All Models</button>
+                <button class="filter-btn" data-filter="pokemon">Pokemon Collection</button>
+                <button class="filter-btn" data-filter="dinosaurs">Prehistoric Dinosaurs</button>
+                <button class="filter-btn" data-filter="legos">Maxi Legos</button>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 60px;">
+                <span class="badge">Inquiries & Assistance</span>
+                <h2>Let's Coordinate Your Batch</h2>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info-card">
+                    <div>
+                        <h3>Direct Channels</h3>
+                        <p style="color: var(--text-muted); margin-top: 8px;">Have bulk inquiries or specific dimension demands? Connect with our logistics operators immediately.</p>
+                        
+                        <div class="contact-details">
+                            <div class="contact-method">
+                                <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                                <div class="contact-method-text">
+                                    <h4>Corporate Email</h4>
+                                    <p>operations@nexus3d.store</p>
+                                </div>
+                            </div>
+                            <div class="contact-method">
+                                <div class="contact-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                                <div class="contact-method-text">
+                                    <h4>Instant Hotline</h4>
+                                    <p>+504 3370-1605</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/50433701605?text=Hi!%20I'm%20browsing%20your%20Nexus3D%20store%20and%20would%20like%20to%20speak%20with%20a%20representative." target="_blank" class="btn btn-whatsapp" style="margin-top: 24px;">
+                        <i class="fa-brands fa-whatsapp"></i> Open Quick Chat
+                    </a>
+                </div>
+
+                <div class="contact-form">
+                    <form id="feedbackForm" onsubmit="event.preventDefault(); alert('Thank you! Your message was saved. For instant placement please use our Checkout system or Direct WhatsApp.');">
+                        <div class="form-group">
+                            <label class="form-label" for="formName">Full Name</label>
+                            <input type="text" id="formName" class="form-control" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="formEmail">Email Address</label>
+                            <input type="email" id="formEmail" class="form-control" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="formMsg">Project Details / Message</label>
+                            <textarea id="formMsg" class="form-control" rows="4" placeholder="Describe size variables or custom color metrics requested..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Nexus3D Studio. High-fidelity dynamic manufacturing. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="cart-overlay" id="cartOverlay">
+        <div class="cart-modal">
+            <div class="cart-header">
+                <h3><i class="fa-solid fa-box"></i> Your Selection Drawer</h3>
+                <button class="cart-close" id="cartClose" aria-label="Close cart">&times;</button>
+            </div>
+            <div class="cart-body" id="cartBody">
+                </div>
+            <div class="cart-footer">
+                <div class="cart-summary-line">
+                    <span class="cart-total-label">Estimated Subtotal:</span>
+                    <span class="cart-total-value" id="cartTotal">$0.00</span>
+                </div>
+                <button class="btn btn-whatsapp cart-checkout-btn" id="checkoutBtn">
+                    <i class="fa-brands fa-whatsapp"></i> Submit Request to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. PRODUCT DATA MATRIX (Using clean, real demonstrative URLs from Unsplash)
+        const productsData = [
+            { id: 'p1', category: 'pokemon', name: 'Mecha-Charizard V2', price: 34.99, material: 'Silk PLA Orange/Black', resolution: '0.12mm Ultra', img: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&q=80&w=400' },
+            { id: 'p2', category: 'pokemon', name: 'Geometric Low-Poly Mewtwo', price: 29.99, material: 'Dual-Tone Purple PLA', resolution: '0.16mm High', img: 'https://images.unsplash.com/photo-1560624052-449f5ddf0c31?auto=format&fit=crop&q=80&w=400' },
+            { id: 'p3', category: 'pokemon', name: 'Bulbasaur Planter Edition', price: 19.99, material: 'Matte Army Green PLA', resolution: '0.20mm Standard', img: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&q=80&w=400' },
+            { id: 'p4', category: 'dinosaurs', name: 'T-Rex Articulated Skeleton', price: 45.00, material: 'Bone White Structural PLA', resolution: '0.12mm Ultra', img: 'https://images.unsplash.com/photo-1532187863486-abf9d39d6618?auto=format&fit=crop&q=80&w=400' },
+            { id: 'p5', category: 'dinosaurs', name: 'Velociraptor Hunting Pose', price: 32.50, material: 'Galaxy Black Premium PLA', resolution: '0.16mm High', img: 'https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?auto=format&fit=crop&q=80&w=400' },
+            { id: 'p6', category: 'legos', name: 'Maxi-Lego Spiderman Scale', price: 49.99, material: 'High-Gloss Crimson PLA', resolution: '0.12mm Ultra', img: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=400' },
+            { id: 'p7', category: 'legos', name: 'Giant Classic Brick Organizer', price: 24.99, material: 'Solid Electric Blue PLA', resolution: '0.20mm Standard', img: 'https://images.unsplash.com/photo-1585366119957-e5733f3c7f76?auto=format&fit=crop&q=80&w=400' }
+        ];
+
+        // 2. STATE MANAGER
+        let cart = JSON.parse(localStorage.getItem('nexus3d_cart')) || [];
+
+        // DOM ELEMENTS
+        const productsGrid = document.getElementById('productsGrid');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const cartTrigger = document.getElementById('cartTrigger');
+        const cartClose = document.getElementById('cartClose');
+        const cartBody = document.getElementById('cartBody');
+        const cartTotal = document.getElementById('cartTotal');
+        const cartCount = document.getElementById('cartCount');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        // 3. RENDER FUNCTION FOR PRODUCTS
+        function renderProducts(filter = 'all') {
+            productsGrid.innerHTML = '';
+            const filtered = filter === 'all' ? productsData : productsData.filter(p => p.category === filter);
+            
+            filtered.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="product-image-container">
+                        <span class="product-tag">${product.resolution}</span>
+                        <img src="${product.img}" alt="${product.name}" class="product-img" loading="lazy">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-meta">
+                            <span><i class="fa-solid fa-layer-group"></i>${product.material}</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$${product.price.toFixed(2)}</span>
+                            <div class="product-actions">
+                                <button class="btn-icon-cart" onclick="addToCart('${product.id}')" aria-label="Add ${product.name} to cart">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                productsGrid.appendChild(card);
+            });
+        }
+
+        // 4. CART LOGIC INTERACTION
+        function addToCart(productId) {
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                const product = productsData.find(p => p.id === productId);
+                cart.push({ ...product, quantity: 1 });
+            }
+            updateCart();
+            openCartDrawer();
+        }
+
+        function updateCart() {
+            localStorage.setItem('nexus3d_cart', JSON.stringify(cart));
+            renderCartItems();
+            calculateCartTotals();
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+            item.quantity += delta;
+            if (item.quantity <= 0) {
+                cart = cart.filter(i => i.id !== id);
+            }
+            updateCart();
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(i => i.id !== id);
+            updateCart();
+        }
+
+        function calculateCartTotals() {
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            cartTotal.innerText = `$${total.toFixed(2)}`;
+            cartCount.innerText = count;
+        }
+
+        function renderCartItems() {
+            cartBody.innerHTML = '';
+            if (cart.length === 0) {
+                cartBody.innerHTML = `
+                    <div class="cart-empty-msg">
+                        <i class="fa-solid fa-box-open"></i>
+                        <p>Your selection drawer is empty.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            cart.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `
+                    <img src="${item.img}" alt="${item.name}" class="cart-item-img">
+                    <div class="cart-item-details">
+                        <h4 class="cart-item-title">${item.name}</h4>
+                        <span class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</span>
+                        <div class="cart-item-qty">
+                            <button class="qty-btn" onclick="changeQty('${item.id}', -1)">-</button>
+                            <span class="qty-val">${item.quantity}</span>
+                            <button class="qty-btn" onclick="changeQty('${item.id}', 1)">+</button>
+                        </div>
+                    </div>
+                    <button class="cart-item-remove" onclick="removeFromCart('${item.id}')" aria-label="Remove item">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                `;
+                cartBody.appendChild(div);
+            });
+        }
+
+        // 5. WINDOW DRAWER INTERACTION
+        function openCartDrawer() { cartOverlay.classList.add('active'); }
+        function closeCartDrawer() { cartOverlay.classList.remove('active'); }
+
+        cartTrigger.addEventListener('click', openCartDrawer);
+        cartClose.addEventListener('click', closeCartDrawer);
+        cartOverlay.addEventListener('click', (e) => {
+            if (e.target === cartOverlay) closeCartDrawer();
+        });
+
+        // 6. CHECKOUT GENERATOR LINK (WHATSAPP INTEGRATION)
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) {
+                alert("Your cart is empty. Please select architectural 3D models before checking out.");
+                return;
+            }
+
+            const phone = "50433701605";
+            let message = "Hi! I am interested in quoting and checking availability for these premium 3D figures that I selected on your website:\n\n";
+            
+            cart.forEach((item, index) => {
+                message += `${index + 1}. Model: ${item.name}\n`;
+                message += `   Specs: [${item.material}]\n`;
+                message += `   Qty: ${item.quantity} x Price: $${item.price.toFixed(2)}\n\n`;
+            });
+
+            const totalSum = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            message += `Estimated Total Order: $${totalSum.toFixed(2)}\n\n`;
+            message += "Could you please confirm the current production availability, turnaround time, and next steps for shipping? I'd love to coordinate a quick call if necessary. Thanks!";
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${phone}?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
+        });
+
+        // 7. CATALOG FILTERS
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelector('.filter-btn.active').classList.remove('active');
+                e.target.classList.add('active');
+                renderProducts(e.target.getAttribute('data-filter'));
+            });
+        });
+
+        // 8. MOBILE NAVIGATION MENU TOGGLE
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark');
+        });
+
+        // Close mobile nav when link is clicked
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const icon = menuToggle.querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-xmark');
+            });
+        });
+
+        // 9. UPDATE INTERSECTION OBSERVER FOR ACTIVE NAVBAR LINKS
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            const scrollPos = window.scrollY + 120;
+
+            sections.forEach(section => {
+                if (scrollPos >= section.offsetTop && scrollPos < (section.offsetTop + section.offsetHeight)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // INITIAL RENDERING ON MOUNT
+        renderProducts();
+        calculateCartTotals();
+        renderCartItems();
+    </script>
+</body>
+</html>
